@@ -1,7 +1,5 @@
 package com.bayzdelivery.model;
 
-import lombok.*;
-
 import java.io.Serializable;
 import java.time.Instant;
 import javax.persistence.CascadeType;
@@ -13,16 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "delivery")
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Delivery implements Serializable{
   private static final long serialVersionUID = 123765351514001L;
   @Id

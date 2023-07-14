@@ -39,4 +39,17 @@ public class DeliveryController {
     return ResponseEntity.notFound().build();
   }
 
+  @GetMapping("/top-earners")
+  public ResponseEntity<TopDeliveryMenDto> getTopDeliveryMen(
+          @RequestParam("startDate") Instant startDate,
+          @RequestParam("endDate") Instant endDate) {
+    List<Person> topDeliveryMen = deliveryService.getTopDeliveryMenByCommission(startDate, endDate);
+    Double averageCommission = deliveryService.getAverageCommission();
+    TopDeliveryMenDto topDeliveryMenDto = new TopDeliveryMenDto();
+    List<PersonResponse> personResponseList = topDeliveryMen.stream().map(DtoMapper::toPersonResponse).collect(Collectors.toList());
+    topDeliveryMenDto.setPersonResponseList(personResponseList);
+    topDeliveryMenDto.setAverageCommission(averageCommission);
+    return ResponseEntity.ok(topDeliveryMenDto);
+  }
+
 }

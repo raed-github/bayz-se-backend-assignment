@@ -1,7 +1,5 @@
 package com.bayzdelivery.model;
 
-import lombok.*;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -9,11 +7,6 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "person")
-@Builder
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Person implements Serializable{
 
   private static final long serialVersionUID = 432154291451321L;

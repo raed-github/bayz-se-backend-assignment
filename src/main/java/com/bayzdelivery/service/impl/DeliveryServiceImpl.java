@@ -54,7 +54,36 @@ public class DeliveryServiceImpl implements DeliveryService {
     return commission;
   }
 
+  /**
+   * display top 3 delivery men who earn the most commission in given time interval,
+   * show average commission as well
+   * @param startDate
+   * @param endDate
+   * @return
+   */
+  @Override
+  public List<Person> getTopDeliveryMenByCommission(Instant startDate, Instant endDate) {
+    return deliveryRepository.findTop3ByCommissionBetweenOrderByCommissionDesc(startDate, endDate);
+  }
 
+  /**
+   * a method that will be used to find delayed deliveries
+   * @return
+   */
+  @Override
+  public Iterable<Delivery> findDelayedDeliveries() {
+    List<Delivery> delayedDeliveries = new ArrayList<>();
+    return deliveryRepository.findAll();
+  }
+
+  /**
+   * a method that will return the average commissions
+   * @return
+   */
+  @Override
+  public Double getAverageCommission() {
+    return deliveryRepository.getAverageCommission();
+  }
 
   public DeliveryRepository getDeliveryRepository() {
     return deliveryRepository;

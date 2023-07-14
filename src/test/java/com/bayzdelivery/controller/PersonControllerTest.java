@@ -44,6 +44,22 @@ public class PersonControllerTest {
 
   @Test
   public void testUserShouldBeRegistered() {
+    PersonRequest personRequest = new PersonRequest();
+    personRequest.setName("John");
+    personRequest.setEmail("John@mydomain.com");
+    personRequest.setRegistrationNumber("123456");
+    personRequest.setType(ApplicationConstants.DELIVERY_MEN);
+
+    ResponseEntity<PersonResponse> personResponse =
+            template.postForEntity(API_URI, personRequest,
+                    PersonResponse.class);
+
+    assertThat(personResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    assertThat(personResponse.getBody().getEmail()).isEqualTo(personRequest.getEmail());
+    assertThat(personResponse.getBody().getName()).isEqualTo(personRequest.getName());
+    assertThat(personResponse.getBody().getType()).isEqualTo(personRequest.getType());
+    assertThat(personResponse.getBody().getRegistrationNumber()).isEqualTo(personRequest.getRegistrationNumber());
+    assert(personResponse.getBody().getId()!=null);
   }
 
 }

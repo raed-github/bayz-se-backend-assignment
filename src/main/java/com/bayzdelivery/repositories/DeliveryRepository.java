@@ -12,5 +12,12 @@ import java.util.List;
 
 @RestResource(exported = false)
 public interface DeliveryRepository extends CrudRepository<Delivery, Long> {
+    @Query("SELECT p FROM Person p INNER JOIN Delivery d ON p.id = d.deliveryMan.id " +
+            "WHERE d.startTime >= :startDate AND d.endTime <= :endDate " +
+            "GROUP BY p " +
+            "ORDER BY SUM(d.comission) DESC")
+    List<Person> findTop3ByCommissionBetweenOrderByCommissionDesc(@Param("startDate") Instant startDate, @Param("endDate") Instant endDate);
 
+    @Query("SELECT AVG(d.comission) FROM Delivery d")
+    Double getAverageCommission();
 }

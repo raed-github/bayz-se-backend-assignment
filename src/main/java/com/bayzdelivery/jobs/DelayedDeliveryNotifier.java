@@ -1,12 +1,19 @@
 package com.bayzdelivery.jobs;
 
-import com.bayzdelivery.exceptions.GlobalExceptionHandler;
+import com.bayzdelivery.model.Delivery;
+import com.bayzdelivery.service.DeliveryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * A notifier class that checks for delayed deliveries.
+ * @author Raed
+ *
+ */
 @Component
 public class DelayedDeliveryNotifier {
 
@@ -30,4 +37,5 @@ public class DelayedDeliveryNotifier {
     public void notifyCustomerSupport() {
         LOG.info("Customer support team is notified!");
     }
+
 }

@@ -9,6 +9,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * An exception controller class that will handle exception and return a formatted message to client.
+ * @author Raed
+ *
+ */
 @ControllerAdvice
 @Component
 public class GlobalExceptionHandler {

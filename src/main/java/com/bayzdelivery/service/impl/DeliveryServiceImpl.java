@@ -37,6 +37,12 @@ public class DeliveryServiceImpl implements DeliveryService {
             .orElseThrow(() -> new GlobalException(ApplicationConstants.DELIVERY_MAN_NOT_FOUND));
     Person customer = personRepository.findById(customerId)
             .orElseThrow(() -> new GlobalException(ApplicationConstants.CUSTOMER_NOT_FOUND));
+    if(!deliveryMan.getType().equalsIgnoreCase(ApplicationConstants.DELIVERY_MEN)){
+      throw new GlobalException(ApplicationConstants.DELIVERY_MAN_NOT_FOUND);
+    }
+    if(!customer.getType().equalsIgnoreCase(ApplicationConstants.CUSTOMER)){
+      throw new GlobalException(ApplicationConstants.CUSTOMER_NOT_FOUND);
+    }
     delivery.setDeliveryMan(deliveryMan);
     delivery.setCustomer(customer);
     delivery.setComission(this.calculateCommission(delivery));

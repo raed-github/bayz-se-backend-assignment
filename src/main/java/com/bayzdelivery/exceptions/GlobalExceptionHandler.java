@@ -23,8 +23,15 @@ public class GlobalExceptionHandler {
   @ExceptionHandler
   public ResponseEntity<AbstractMap.SimpleEntry<String, String>> handle(Exception exception) {
     LOG.error("Request could not be processed: ", exception);
-    AbstractMap.SimpleEntry<String, String> response =
-        new AbstractMap.SimpleEntry<>("message", "Request could not be processed");
+    AbstractMap.SimpleEntry<String, String> response = null;
+    if(exception instanceof GlobalException){
+      response =
+              new AbstractMap.SimpleEntry<>("message", exception.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+    }else {
+      response =
+              new AbstractMap.SimpleEntry<>("message", "Request could not be processed");
+    }
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
 }
